@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,7 +20,7 @@ public class dialog_new_note extends DialogFragment {
     @Override
     public Dialog onCreateDialog( Bundle savedInstanceState) {
 
-        AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
+        final AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
 
         LayoutInflater inflater=getActivity().getLayoutInflater();
 
@@ -34,6 +35,11 @@ public class dialog_new_note extends DialogFragment {
 
         Button btnCancel=(Button)dialogView.findViewById(R.id.btnCancel);
         Button btnOk=(Button)dialogView.findViewById(R.id.btnOk);
+
+        //Casting a MainActivity que es la que ha llamdo al dialogo
+        final MainActivity callingActivity=(MainActivity) getActivity();
+
+
 
         builder.setView(dialogView)
                 .setMessage("Añadir una nueva nota");
@@ -53,17 +59,33 @@ public class dialog_new_note extends DialogFragment {
                 Note newNote=new Note();
 
                 //Configura las 5 variables de una nueva Nota.
-                newNote.setTitle(editTitle.getText().toString());
-                newNote.setDescription(editDescription.getText().toString());
+
+                if (!editTitle.getText().toString().isEmpty()) {
+
+                    if(editTitle.getText().toString().length()<50) {
+                        if (editDescription.getText().toString().length()<140) {
+                            newNote.setTitle(editTitle.getText().toString());
+                            newNote.setDescription(editDescription.getText().toString());
+
+                            callingActivity.createNewNote(newNote);
+                        }else{
+                            Toast.makeText(getActivity(), R.string.description_size,
+                                    Toast.LENGTH_LONG).show();
+                        }
+
+                    }else{
+                        Toast.makeText(getActivity(), R.string.title_size, Toast.LENGTH_LONG).show();
+                    }
+                }else{
+                    Toast.makeText(getActivity(), R.string.title_empty,Toast.LENGTH_LONG).show();
+
+                }
 
                 newNote.setIdea(checBoxIdea.isChecked());
                 newNote.setTodo(checkBoxTodo.isChecked());
                 newNote.setImportant(checkBoxImportant.isChecked());
 
-                //Casting a MainActivity que es la que ha llamdo al dialogo
-                MainActivity callingActivity=(MainActivity) getActivity();
 
-                callingActivity.createNewNote(newNote);
 
                 //Cierra el dialogo
                 dismiss();

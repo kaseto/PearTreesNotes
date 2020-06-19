@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -45,6 +46,9 @@ public class MainActivity extends AppCompatActivity {
                 dialog.show(getSupportFragmentManager(),"");
             }
         });
+
+
+
     }
 
     @Override
@@ -67,8 +71,14 @@ public class MainActivity extends AppCompatActivity {
             dialog_new_note dialog =new dialog_new_note();
             dialog.show(getSupportFragmentManager(),"note_create");
         }
+        if(item.getItemId()==R.id.action_settings){
+            Intent intent=new Intent(this,SettingsActivity.class);
+            startActivity(intent);
+        }
         return false;
     }
+
+
 
 
     public class NoteAdapter extends BaseAdapter{

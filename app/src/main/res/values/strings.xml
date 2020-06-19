@@ -18,6 +18,10 @@
     <string name="rb_fast">Fast</string>
     <string name="rb_slow">Slow</string>
     <string name="rb_none">None</string>
+    <string name="description_size">The description cannot exceed 140 characters</string>
+    <string name="title_empty">You must enter a title</string>
+    <string name="title_size">The title must be less than 30 characters.</string>
+
 
 
 </resources>

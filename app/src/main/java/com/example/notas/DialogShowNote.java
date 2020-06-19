@@ -54,8 +54,8 @@ public class DialogShowNote extends DialogFragment {
 
         Button btnOk=(Button)dialogView.findViewById(R.id.btnOk);
 
-        builder.setView(dialogView)
-                .setMessage("Tu nota: ");
+        builder.setView(dialogView);
+                //.setMessage("Tu nota: ");
         btnOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

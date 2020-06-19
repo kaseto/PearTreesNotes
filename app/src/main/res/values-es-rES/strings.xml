@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">PearTree Notes</string>
+    <string name="app_name">PearTrees Notes</string>
     <string name="action_settings">Ajustes</string>
     <string name="action_add">Añadir</string>
     <string name="title_hint">Título</string>
@@ -18,4 +18,7 @@
     <string name="sound_checkbox">On or Off</string>
     <string name="Todo_checkbox">Tarea</string>
     <string name="toast_long">El texto debe tener menos de 240 caracteres</string>
+    <string name="description_size">La descripción no debe exceder de 140 caracteres.</string>
+    <string name="title_empty">Debes introducir un título.</string>
+    <string name="title_size">El título no debe exceder de 30 caracteres.</string>
 </resources>

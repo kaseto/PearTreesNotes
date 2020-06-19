@@ -18,7 +18,9 @@ public class Note {
     }
 
     public void setTitle(String mTitle) {
-        this.mTitle = mTitle;
+
+            this.mTitle = mTitle;
+
     }
 
     public String getDescription() {
