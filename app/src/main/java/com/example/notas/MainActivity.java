@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -18,12 +19,19 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import org.json.JSONException;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
  private  NoteAdapter mNoteAdapter;
+
+ private boolean mSound;
+ private int mAnimOption;
+ private SharedPreferences mPrefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,16 +47,24 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 //Recupermos la nota de la posición pulsada por el usuario
-                Note tempNote=mNoteAdapter.getItem(position);
+                Note tempNote = mNoteAdapter.getItem(position);
                 //creamos una instancia de show note
-                DialogShowNote dialog=new DialogShowNote();
+                DialogShowNote dialog = new DialogShowNote();
                 dialog.sendNoteSelected(tempNote);
-                dialog.show(getSupportFragmentManager(),"");
+                dialog.show(getSupportFragmentManager(), "");
             }
         });
+    }
+        //el método onREsume se llama despues del onCreate y al volver a la actividad
+    // después de pasar por otra
+    protected void onResume() {
 
+        //Se cargan aquí las preferencias:
 
-
+        mPrefs=getSharedPreferences("PearTrees Notes",MODE_PRIVATE);
+        mSound=mPrefs.getBoolean("sound",true);
+        mAnimOption=mPrefs.getInt("anim option",SettingsActivity.FAST);
+        super.onResume();
     }
 
     @Override
@@ -79,11 +95,39 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        mNoteAdapter.saveNotes();
+    }
 
 
     public class NoteAdapter extends BaseAdapter{
 
-        List<Note> notelist= new ArrayList<>();
+        List<Note> notelist= new ArrayList<Note>();
+        private  JSONSerializer mSerializer;
+
+        public NoteAdapter(){
+            mSerializer=new JSONSerializer("PearTrees.json",MainActivity.this.getApplicationContext());
+
+            try{
+                notelist=mSerializer.load();
+
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+
+        public  void saveNotes() {
+            try {
+                mSerializer.save(notelist);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+
 
         @Override
         public int getCount() {
