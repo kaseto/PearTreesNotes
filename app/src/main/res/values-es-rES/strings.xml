@@ -21,4 +21,5 @@
     <string name="description_size">La descripción no debe exceder de 140 caracteres.</string>
     <string name="title_empty">Debes introducir un título.</string>
     <string name="title_size">El título no debe exceder de 30 caracteres.</string>
+    <string name="delete_note_text">¿Estás seguro de eliminar esta nota?</string>
 </resources>

@@ -62,7 +62,7 @@ public class SettingsActivity extends AppCompatActivity {
         });
 
         //Lógica de cambiar de tipo animación:
-        mAnimationOption=mPrefs.getInt("anim option", FAST);
+        mAnimationOption=mPrefs.getInt("anim option", SLOW);
 
         final RadioGroup radioGroup=(RadioGroup)findViewById(R.id.rg_sound);
         radioGroup.clearCheck();//Se limpian los RadioButtons

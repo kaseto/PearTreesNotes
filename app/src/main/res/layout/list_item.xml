@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/colorAccent"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorAccent">
 
     <ImageView
         android:id="@+id/image_view_todo"
@@ -50,7 +51,7 @@
         android:id="@+id/image_vew_important"
         android:layout_width="35dp"
         android:layout_height="35dp"
-        android:padding="4dp"
         android:background="@color/colorAccent"
+        android:padding="4dp"
         app:srcCompat="@drawable/baseline_warning_24" />
 </RelativeLayout>
